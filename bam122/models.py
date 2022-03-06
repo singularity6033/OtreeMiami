@@ -91,14 +91,13 @@ class Constants(BaseConstants):
     test_env = 0
     ImgQnTemplate = "bam122/ImgQnTemplate.html"
     num_rounds = 51  # 50+1 (end of task)
-    num_attention_check = 4
+    num_attention_check = 5
     num_qn_per_normal = 6
     num_qn_per_ac = 3
     attention_check_list = []
     # we select random ac rounds in [1-10], [11-20], ...
     for round_interval in range(1, num_rounds + 1, 10):
         attention_check_list.append(random.sample(range(round_interval, round_interval + 9), k=1)[0])
-    # attention_check_list = [1]
     attention_check_answers = {"AC_Q0": "Average/Neutral",
                                "AC_Q1": "Exogenous",
                                "AC_Q2": "Very Versatile",

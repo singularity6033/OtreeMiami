@@ -68,14 +68,12 @@ class ac_qn_page(Page):
             if (not player_all_round.AC_Round_Num == -1) and player_all_round.AC_Correct_Status:
                 num_correct_ac += 1
         self.player.AC_Correctness = num_correct_ac / Constants.num_attention_check
+        self.participant.vars['AC_Correctness'] = self.player.AC_Correctness
 
 
 class result_page(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
-
-    def before_next_page(self):
-        self.participant.vars['AC_Correctness'] = self.player.AC_Correctness
 
 
 page_sequence = [
