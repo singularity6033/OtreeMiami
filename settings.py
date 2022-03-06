@@ -19,8 +19,8 @@ SESSION_CONFIGS = [
         display_name='Otree Miami',
         num_demo_participants=None,
         app_sequence=[
-            # 'aas140',
-            # 'bam122',
+            'aas140',
+            'bam122',
             'cdd129'
         ],
         treatment=1,  # page sequence [X, Y, Z]
@@ -63,24 +63,3 @@ SECRET_KEY = 'pihjpwj63+h$v)!)#fu1@a+^r$xx3f&yzue1rmsz)=h_rpaxnw'
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree']
-
-# inactive session configs
-### dict(name='trust', num_demo_participants=2, app_sequence=['trust']),
-### dict(name='prisoner', num_demo_participants=2, app_sequence=['prisoner']),
-### dict(name='ultimatum', num_demo_participants=2, app_sequence=['ultimatum']),
-### dict(name='ultimatum_strategy', num_demo_participants=2, app_sequence=['ultimatum'], use_strategy_method=True),
-### dict(name='ultimatum_non_strategy', num_demo_participants=2, app_sequence=['ultimatum'], use_strategy_method=False),
-### dict(name='vickrey_auction', num_demo_participants=3, app_sequence=['vickrey_auction']),
-### dict(name='volunteer_dilemma', num_demo_participants=3, app_sequence=['volunteer_dilemma']),
-### dict(name='cournot', num_demo_participants=2, app_sequence=['cournot']),
-### dict(name='principal_agent', num_demo_participants=2, app_sequence=['principal_agent']),
-### dict(name='dictator', num_demo_participants=2, app_sequence=['dictator']),
-### dict(name='matching_pennies', num_demo_participants=2, app_sequence=['matching_pennies']),
-### dict(name='traveler_dilemma', num_demo_participants=2, app_sequence=['traveler_dilemma']),
-### dict(name='bargaining', num_demo_participants=2, app_sequence=['bargaining']),
-### dict(name='common_value_auction', num_demo_participants=3, app_sequence=['common_value_auction']),
-### dict(name='bertrand', num_demo_participants=2, app_sequence=['bertrand']),
-### dict(name='real_effort', num_demo_participants=1, app_sequence=['real_effort']),
-### dict(name='lemon_market', num_demo_participants=3, app_sequence=['lemon_market']),
-### dict(name='public_goods_simple', num_demo_participants=3, app_sequence=['public_goods_simple']),
-### dict(name='trust_simple', num_demo_participants=2, app_sequence=['trust_simple']),
