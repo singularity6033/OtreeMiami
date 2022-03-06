@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Thank you for participating!
+{% endblock %}
+
+{% block content %}
+
+Your total payment for the experiment will be calculated and transferred to your Prolific account as soon as possible.
+Please note that you will be credited only after the conclusion of the entire study.<br><br>
+
+    <u><b><a href={{ completionlink }} target="_blank">You must return to Prolific here</a></b></u> to prove that you have
+    completed the study. <br><br>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Questionnaire
+{% endblock %}
+
+{% block content %}
+
+    Please answer the following questions using the scale provided. <br><br>
+    <b>(1 = Strongly disagree, ..., 7 = Strongly agree)</b>. <br><br><br>
+
+    <table class="table">
+    {% for field in form %}
+        {% if " write " not in field.label %}
+        <tr>
+            <th><span style="font-weight:normal">{{ field.label }}</span></th>
+            {% for choice in field %}
+                <td>{{ choice }}</td>
+            {% endfor %}
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </table><br>
+
+    {% for field in form %}
+        {% if field.name == 'DifficultyComment' or field.name == 'Feedback'%}
+            {{ field.label }} <br><br>
+            <textarea name="{{ field.name }}" cols="80" rows="10"></textarea><br>
+        {% endif %}
+    {% endfor %}
+
+    <br><br>
+    {% next_button %}
+
+{% endblock %}

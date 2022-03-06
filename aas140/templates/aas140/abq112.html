@@ -1,0 +1,26 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+Welcome to the study.<br><br>
+
+In the following pages, you will be shown a series of pictures of 50 randomly selected felons obtained from the publicly
+available Florida Correction Database.<br><br>
+
+For each picture, you will be asked 6 questions concerning the felon in the picture.<br><br>
+After you finish all 6 questions, you will move on to a picture of the next felon and repeat the process.<br><br>
+
+The task will take on average 20 minutes to complete and you will be paid a completion fee of 3.5 pounds (~$4).
+<br><br> There will be several attention checks throughout the study: <u>you will not be
+eligible for payment if you fail more than half of the attention checks.</u>
+
+If you have understood the instructions, please click the below button to begin the study.<br><br>
+
+{% next_button %}
+
+{% endblock %}

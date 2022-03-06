@@ -1,0 +1,114 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block content %}
+
+<font style="font-family:arial" size="18"><b><center>Consent to Participate</center></b></font>
+
+<b>Name of PI:</b> Tang Cheng Keat<br><br>
+<b>Institution and contact details:</b> Nanyang Technological University, School of Social Sciences, Division of
+Economics, c.k.tang@ntu.edu.sg<br><br>
+<b>IRB reference number:</b> IRB-2020-02-025<br><br>
+
+<b>Title of Study:</b> Attractiveness and Criminal Sentencing<br><br>
+
+<b>Objective:</b> The purpose of this study is to explore the relationship between the attractiveness of felons and
+criminal sentencing. If you agree to participate in this experiment, more detailed instructions will be provided later
+on in the study.<br><br>
+
+<b>Procedures:</b> In this study, you will be shown pictures of convicted felons across Florida, USA. These felons have
+been found guilty, are convicted and currently are serving time in correction facilities. You will be tasked with
+assessing the appearance of randomly selected felons through their mugshots through several simple survey questions.
+Your responses to the survey will be anonymous.
+<br><br>
+
+<b>Right to Refuse or Withdraw:</b> Your decision to participate in this research is voluntary and completely up to you.
+You can also withdraw from the research at any time with no penalty by informing the experimenters and all the data
+collected will be discarded.<br><br>
+
+<b>Risks and Discomforts:</b> There will be no risks from participating in this research. However, there may be some
+discomfort as some of the felons may look very intimidating.<br><br>
+
+<b>Benefits:</b> There are no direct benefits to participants. The knowledge gained from this study will contribute to
+the economics literature in general and help us to better understand the role of attractiveness in criminal sentencing.
+<br><br>
+
+<b>Compensation:</b> Your earnings will consist of a completion fee of 3.50 pounds. You will be paid via Prolific upon
+completion of the experiment. There will be several attention checks throughout the study: <u>you will not be eligible
+    for payment if you fail more than half of the attention checks.</u>
+<br><br>
+
+<b>Anonymous and Confidential Data Collection:</b> Data collection will be anonymous.
+<br><br>
+
+<b>Confidentiality of records:</b> Data will be collected on choices made during the survey. Participants are not
+personally identified, but instead each of them is given a randomly generated numerical ID as identifier. Consequently,
+there will be no identifiable information used in any publications or presentations arising from this research project.
+<br><br>
+
+<b>Personal Data:</b> By signing the Consent Form attached, you (or your legally acceptable representative, if relevant)
+are authorizing (i) collection, access to, use and storage of your “Personal Data” by NTU, for the purposes of the study
+and (ii) disclosure of such Personal Data to, and use and storage by, authorised service providers and relevant third
+parties, whether located in Singapore or overseas, for the Purpose; and (iii) disclosure of such Personal Data to the
+relevant government ministries, statutory boards and/or any other government agencies when requested and/or required
+under relevant legislations.
+<br><br>
+
+<b>“Personal Data”</b> means data about you which makes you identifiable: (i) from such data; or (ii) from that data and other
+information which an organisation has or is likely to have access.<br><br>
+
+Research arising in the future, based on this “Personal Data”, will be subject to review by the relevant institutional
+review board.<br><br>
+
+Data collected are the property of Nanyang Technological University. In the event of any publication regarding this
+study, your identity will remain confidential.<br><br>
+
+Any research data containing your “Personal Data” that is collected for the purposes described in this Consent Form will
+be stored in Singapore. Only anonymized research data will be transferred out of Singapore in the event of future
+overseas collaborations with other universities.<br><br>
+
+<b>Who to contact with questions:</b>  Tang Cheng Keat, c.k.tang@ntu.edu.sg<br><br>
+
+Should you have questions on participants' rights in the study, please contact:<br>
+NTU-Institutional Review Board<br>
+Research Integrity and Ethics Office<br>
+62 Nanyang Drive<br>
+N1.2-B1-02A<br>
+Singapore 637459<br>
+Email: irb@ntu.edu.sg<br><br>
+
+<b>Consent Form</b><br><br>
+
+I have read, discussed and understand the information and procedures in the study information sheet attached to this
+consent form. My questions concerning the study have been answered to my satisfaction, and I acknowledge that I am
+participating in this study of my own free will. I understand that I may refuse to participate or stop participating
+at any time.<br><br>
+
+<div>
+    <button style="cursor: pointer;" name="Consented" value="True">
+        Yes, I have read the above and agree to participate in this research.
+    </button>
+</div>
+<br>
+<input type="hidden" name="IsMobile" id="is_mobile">
+<a href="https://prolific.co">I do not wish to participate (click to go back to Prolific's homepage)</a><br><br><br>
+<br><br><br><br><br>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function isMobile() {
+            const toMatch = [
+                /Android/i,
+                /iPhone/i,
+                /iPad/i,
+            ];
+            return toMatch.some((toMatchItem) => {
+                return navigator.userAgent.match(toMatchItem);
+            });
+        }
+        console.log(isMobile())
+        document.getElementById('is_mobile').value = isMobile() ? 1 : 0;
+    </script>
+{% endblock %}

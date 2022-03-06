@@ -1,0 +1,17 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    You have now come to the end of the task. <br><br>
+    Finally, we would like you to complete a post-experiment questionnaire. <br><br>
+    Please click Next to proceed. <br><br>
+
+    {% formfields %}
+
+    {% next_button %}
+
+{% endblock %}

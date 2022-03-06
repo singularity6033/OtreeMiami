@@ -1,0 +1,69 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round {{ round_number }}
+{% endblock %}
+
+{% block content %}
+
+<center><img src={% static img %} width="450px" /> <br><br></center>
+
+<div class="title" style="font-size: 1rem; line-height: 4; font-weight:bold;">
+    Please select the option which says:
+</div>
+
+{% if is_mobile == 0 %}
+    <table class="table">
+    {% for field in form %}
+        <tr>
+            <td style="border-color: white; font-size: 0.9rem; font-weight: 600; padding: 0; line-height: 1.5;" colspan="4">
+                <u>{{ field.label }}</u>
+            </td>
+        </tr>
+        <tr>
+        {% for choice in field %}
+            <td style="border-color: white; font-size: 0.81rem; line-height: 1.5">
+                {{ choice }}
+            </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <table class="table">
+    {% for field in form %}
+        <tr>
+            <td style="border-color: white; font-weight: 600; padding: 0; line-height: 1.5;" colspan="4">
+                <u>{{ field.label }}</u>
+            </td>
+        </tr>
+        <tr>
+        {% for choice in field %}
+            <td style="border-color: white; display: block; line-height: 1.5">
+                {{ choice }}
+            </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+
+{#{% formfields %}#}
+
+{% next_button %}
+
+{% endblock %}
+
+{% block styles %}
+   <style>
+      .col-form-label{
+          font-weight:bold;
+          font-size: 0.81rem;
+      }
+      .form-check-label{
+          font-size: 0.81rem;
+          line-height: 2;
+      }
+   </style>
+{% endblock %}
