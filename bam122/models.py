@@ -92,6 +92,7 @@ class Constants(BaseConstants):
     ImgQnTemplate = "bam122/ImgQnTemplate.html"
     num_rounds = 51  # 50+1 (end of task)
     num_attention_check = 5
+    num_attention_check_qn = 8
     num_qn_per_normal = 6
     num_qn_per_ac = 3
     attention_check_list = []
@@ -100,8 +101,12 @@ class Constants(BaseConstants):
         attention_check_list.append(random.sample(range(round_interval, round_interval + 9), k=1)[0])
     attention_check_answers = {"AC_Q0": "Average/Neutral",
                                "AC_Q1": "Exogenous",
-                               "AC_Q2": "Very Versatile",
-                               "AC_Q3": "Average/Neutral"}
+                               "AC_Q2": "Versatile",
+                               "AC_Q3": "Average/Neutral",
+                               "AC_Q4": "Very Aggressive",
+                               "AC_Q5": "Dark",
+                               "AC_Q6": "Very Overweight",
+                               "AC_Q7": "Average/Neutral"}
 
 
 class Subsession(BaseSubsession):
@@ -130,8 +135,12 @@ class Player(BasePlayer):
     # attention check questions
     AC_Q0 = make_attention_check_field("Unscientific", "Scientific", "Average/Neutral")
     AC_Q1 = make_attention_check_field("Exogenous", "Endogenous", "Exogenous")
-    AC_Q2 = make_attention_check_field("Unversatile", "Versatile", "Very Versatile")
+    AC_Q2 = make_attention_check_field("Unversatile", "Versatile", "Versatile")
     AC_Q3 = make_attention_check_field("Repentant", "Unrepentant", "Average/Neutral")
+    AC_Q4 = make_attention_check_field("Aggressive", "Friendly", "Very Aggressive")
+    AC_Q5 = make_attention_check_field("Dark", "Fair", "Dark")
+    AC_Q6 = make_attention_check_field("Underweight", "Overweight", "Very Overweight")
+    AC_Q7 = make_attention_check_field("Feminine", "Masculine", "Average/Neutral")
 
     # attention check related attributes
     AC_QN_Selected = JSONField(default=[])

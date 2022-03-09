@@ -24,7 +24,7 @@ SESSION_CONFIGS = [
             'cdd129'
         ],
         treatment=1,  # page sequence [X, Y, Z]
-        completion_link='https://app.prolific.co/submissions/complete?cc=11111111',
+        completion_link='https://app.prolific.co/submissions/complete?cc=23000699',
         non_completion_link='https://www.prolific.co/'
     )
 ]

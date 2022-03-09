@@ -32,7 +32,7 @@ class img_qn_page(Page):
 class ac_qn_page(Page):
     form_model = 'player'
     form_fields = []
-    qn_ids = random.sample(range(Constants.num_attention_check), k=Constants.num_qn_per_ac)
+    qn_ids = random.sample(range(Constants.num_attention_check_qn), k=Constants.num_qn_per_ac)
     for qn_id in qn_ids:
         form_fields.append('AC_Q' + str(qn_id))
 
