@@ -3,7 +3,6 @@ import pandas as pd
 
 client = MongoClient('mongodb+srv://admin:admin@cluster0.enguk.mongodb.net/test-database?retryWrites=true&w=majority')
 db = client['test-database']
-# print(db.list_collection_names())
 csv_collection = db['csv']
 record_collection = db['record']
 csv_list = [f'list_{str(i + 1)}.csv' for i in range(371)]
@@ -33,10 +32,5 @@ for csv_name in csv_list:
     query = {"name": csv_name}
     new_value = {"$set": {"count": 0}}
     record_collection.update_one(query, new_value)
-
-# query = {"name": 'list_1.csv'}
-# record_collection = db['record']
-# record = record_collection.find_one(query)
-# print(record)
 
 print("Finish updated.")

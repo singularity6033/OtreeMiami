@@ -52,13 +52,12 @@ def random_select_csv():
 
     csv_list = ['list_' + str(i + 1) + '.csv' for i in range(371)]
     selected_csv = random.choice(csv_list)
-    # selected_csv = csv_list[0]
 
     query = {"name": selected_csv}
     record = record_collection.find_one(query)
     selected_csv_times = record['count']
-    # print(selected_csv_times)
 
+    # if we want to run different sessions with different data we need to set count to be 3 by one time
     if selected_csv_times < 3:
         # update count value
         new_value = {"$set": {"count": selected_csv_times + 1}}
@@ -66,7 +65,7 @@ def random_select_csv():
 
         urls = csv_collection.find_one(query)['urls']
         # randomly shuffle the sequence of one csv file
-        # to make sure urls for each player are different even is from the same csv list file
+        # to make sure urls for each player are different even they are from the same csv list file
         random.shuffle(urls)
         csv_dict = {}
         for i in range(len(urls)):
@@ -90,15 +89,16 @@ class Constants(BaseConstants):
     players_per_group = None
     test_env = 0
     ImgQnTemplate = "bam122/ImgQnTemplate.html"
-    num_rounds = 51  # 50+1 (end of task)
+    num_rounds = 51  # 50+1 (additional '1' is the end of task)
     num_attention_check = 5
     num_attention_check_qn = 8
     num_qn_per_normal = 6
     num_qn_per_ac = 3
     attention_check_list = []
     # we select random ac rounds in [1-10], [11-20], ...
-    for round_interval in range(1, num_rounds + 1, 10):
+    for round_interval in range(1, num_rounds, 10):
         attention_check_list.append(random.sample(range(round_interval, round_interval + 9), k=1)[0])
+        # print(attention_check_list)
     attention_check_answers = {"AC_Q0": "Average/Neutral",
                                "AC_Q1": "Exogenous",
                                "AC_Q2": "Versatile",

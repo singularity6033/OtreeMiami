@@ -43,7 +43,7 @@ class cbb239(Page):
 class cty731(Page):
     def is_displayed(self):
         # return True
-        return self.participant.vars['AC_Correctness'] == 1
+        return self.participant.vars['AC_Correctness'] > 0.5
 
     def vars_for_template(self):
         return dict(
@@ -54,7 +54,7 @@ class cty731(Page):
 class non_completion_page(Page):
     def is_displayed(self):
         # return False
-        return not self.participant.vars['AC_Correctness'] == 1
+        return not self.participant.vars['AC_Correctness'] <= 0.5
 
     def vars_for_template(self):
         return dict(
