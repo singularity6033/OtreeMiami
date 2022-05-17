@@ -18,7 +18,7 @@ class img_qn_page(Page):
     def vars_for_template(self):
         round_number = self.round_number
         img = self.participant.vars["urls"][round_number]
-        self.player.Url = img
+        self.player.normal_pic_url = img
         return dict(
             img='https://images.weserv.nl/?url=' + img,
             round_number=self.round_number,
@@ -33,6 +33,7 @@ class ac_qn_page(Page):
     form_model = 'player'
     form_fields = []
     qn_ids = random.sample(range(Constants.num_attention_check_qn), k=Constants.num_qn_per_ac)
+    print('qn_ids', qn_ids)
     for qn_id in qn_ids:
         form_fields.append('AC_Q' + str(qn_id))
 
@@ -42,7 +43,7 @@ class ac_qn_page(Page):
 
     def vars_for_template(self):
         img = random.sample(self.participant.vars["ac_urls"], k=1)[0]
-        self.player.Url = img
+        self.player.attention_check_pic_url = img
         return dict(
             img=img,
             round_number=self.round_number,
@@ -56,6 +57,8 @@ class ac_qn_page(Page):
             if answer == Constants.attention_check_answers[qn_name]:
                 num_correct_qn += 1
         self.player.AC_QN_Correctness = num_correct_qn / Constants.num_qn_per_ac
+        # if we fail one or more questions in attention check round, this ac round should be
+        # considered as a failed one, but we have several ac rounds in total
         if not num_correct_qn < Constants.num_qn_per_ac:
             self.player.AC_Correct_Status = True
 

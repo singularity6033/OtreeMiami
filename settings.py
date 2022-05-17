@@ -24,8 +24,8 @@ SESSION_CONFIGS = [
             'cdd129'
         ],
         treatment=1,  # page sequence [X, Y, Z]
-        completion_link='https://app.prolific.co/submissions/complete?cc=23000699',
-        non_completion_link='https://www.prolific.co/'
+        completion_link='https://app.prolific.co/submissions/complete?cc=5EF380EE',
+        # non_completion_link='https://www.prolific.co/'
     )
 ]
 # see the end of this file for the inactive session configs
@@ -45,8 +45,16 @@ ROOMS = [
         display_name='otree miami',
     ),
     dict(
-        name='otree_miami_prolific',
-        display_name='otree miami prolific',
+        name='otree_miami_prolific_1',
+        display_name='otree miami prolific 1',
+    ),
+    dict(
+        name='otree_miami_prolific_2',
+        display_name='otree miami prolific 2',
+    ),
+    dict(
+        name='otree_miami_prolific_3',
+        display_name='otree miami prolific 3',
     )
 ]
 

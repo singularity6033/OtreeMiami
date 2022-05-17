@@ -108,7 +108,7 @@ at any time.<br><br>
                 return navigator.userAgent.match(toMatchItem);
             });
         }
-        console.log(isMobile())
+        {#console.log(isMobile())#}
         document.getElementById('is_mobile').value = isMobile() ? 1 : 0;
     </script>
 {% endblock %}

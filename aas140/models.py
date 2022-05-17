@@ -10,7 +10,7 @@ from otree.api import (
 )
 
 
-author = 'Erwin Wong'
+author = 'Erwin Wong, Zishuo Yang'
 
 doc = """
 """
