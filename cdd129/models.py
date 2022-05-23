@@ -288,6 +288,8 @@ class Player(BasePlayer):
         blank=Constants.test_env
     )
 
+    attention_check_pass = models.BooleanField(default=False)
+
     def vars_for_template(self, other_identity):
         mask_wearer = self.participant.vars["MaskWearer"]
         own_identity = "mask wearer" if mask_wearer == 1 else "non-mask wearer"

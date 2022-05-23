@@ -33,7 +33,7 @@ class ac_qn_page(Page):
     form_model = 'player'
     form_fields = []
     qn_ids = random.sample(range(Constants.num_attention_check_qn), k=Constants.num_qn_per_ac)
-    print('qn_ids', qn_ids)
+    # print('qn_ids', qn_ids)
     for qn_id in qn_ids:
         form_fields.append('AC_Q' + str(qn_id))
 
@@ -77,6 +77,10 @@ class ac_qn_page(Page):
 class result_page(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
+
+    def before_next_page(self):
+        self.player.AC_Correctness = self.participant.vars['AC_Correctness']
+        self.player.csv_file_used = self.participant.vars["csv_file_used"]
 
 
 page_sequence = [

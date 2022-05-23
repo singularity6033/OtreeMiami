@@ -5,7 +5,17 @@ client = MongoClient('mongodb+srv://admin:admin@cluster0.enguk.mongodb.net/test-
 db = client['test-database']
 csv_collection = db['csv']
 record_collection = db['record']
+session_collection = db['session']
 csv_list = [f'list_{str(i + 1)}.csv' for i in range(371)]
+
+# for csv_name in csv_list:
+#     query = {"name": csv_name}
+#     record = record_collection.find_one(query)
+#     print(record)
+#
+# print(session_collection.find_one({'name': 'qua211oi'}))
+
+session_collection.delete_many({})
 
 for csv_name in csv_list:
     print(csv_name)
@@ -17,12 +27,12 @@ for csv_name in csv_list:
     }
     csv_collection.insert_one(csv_file)
 
-
 record_collection = db['record']
 for csv_name in csv_list:
     record = {
         "name": csv_name,
-        "count": 0
+        "count": 0,
+        "session_code": -1
     }
     record_collection.insert_one(record)
 
@@ -30,7 +40,10 @@ for csv_name in csv_list:
 record_collection = db['record']
 for csv_name in csv_list:
     query = {"name": csv_name}
-    new_value = {"$set": {"count": 0}}
+    new_value = {"$set": {
+        "count": 0,
+        "session_code": -1
+    }}
     record_collection.update_one(query, new_value)
 
 print("Finish updated.")

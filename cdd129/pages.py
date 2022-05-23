@@ -45,6 +45,8 @@ class cty731(Page):
     #     return self.participant.vars['AC_Correctness'] > 0.5
 
     def vars_for_template(self):
+        if self.participant.vars['AC_Correctness'] >= 0.5:
+            self.player.attention_check_pass = True
         return dict(
             completionlink=self.player.subsession.session.config['completion_link']
         )

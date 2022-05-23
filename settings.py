@@ -41,20 +41,20 @@ USE_POINTS = False
 
 ROOMS = [
     dict(
-        name='otree_miami',
-        display_name='otree miami',
+        name='otree_miami_08',
+        display_name='oTree Miami GMT-08',
     ),
     dict(
-        name='otree_miami_prolific_1',
-        display_name='otree miami prolific 1',
+        name='otree_miami_07',
+        display_name='oTree Miami GMT-07',
     ),
     dict(
-        name='otree_miami_prolific_2',
-        display_name='otree miami prolific 2',
+        name='otree_miami_06',
+        display_name='oTree Miami GMT-06',
     ),
     dict(
-        name='otree_miami_prolific_3',
-        display_name='otree miami prolific 3',
+        name='otree_miami_05',
+        display_name='oTree Miami GMT-05',
     )
 ]
 

@@ -49,28 +49,46 @@ def random_select_csv():
     db = client['test-database']
     csv_collection = db['csv']
     record_collection = db['record']
+    # session_collection = db['session']
 
-    csv_list = ['list_' + str(i + 1) + '.csv' for i in range(371)]
+    # session_query = {"name": session_code}
+    # session_record = session_collection.find_one(session_query)
+    # if session_record:
+    #     num_csv_per_session = session_record['num']
+    # else:
+    #     session_in_db = {
+    #         "name": session_code,
+    #         "num": 0,
+    #     }
+    #     session_collection.insert_one(session_in_db)
+    #     num_csv_per_session = 0
+
+    # if num_csv_per_session >= 174:
+    #     csv_list = []
+    #     for x in record_collection.find({"session_code": session_code}):
+    #         if x['count'] < 3:
+    #             csv_list.append(x['name'])
+    # else:
+    #     csv_list = []
+    #     for x in record_collection.find({"session_code": -1}):
+    #         csv_list.append(x['name'])
+
+    csv_list = ['list_' + str(i + 1) + '.csv' for i in range(697)]
+
     selected_csv = random.choice(csv_list)
-
-    cou = 0
-    for item in csv_list:
-        q = {"name": item}
-        r = record_collection.find_one(q)
-        if r['count'] == 3:
-            cou += 1
-    print('cou: ', cou)
-
+    # print(selected_csv)
     query = {"name": selected_csv}
     record = record_collection.find_one(query)
     selected_csv_times = record['count']
+    # session_code_in_db = record['session_code']
 
     if selected_csv_times < 3:
         # update count value
-        # if we want to run different sessions with different data, we need to set count record to 3 in one time
-        # new_value = {"$set": {"count": selected_csv_times + 1}}
-        new_value = {"$set": {"count": 3}}
-        record_collection.update_one(query, new_value)
+        new_value_c = {"$set": {
+            "count": selected_csv_times + 1,
+            # "session_code": session_code
+        }}
+        record_collection.update_one(query, new_value_c)
         urls = csv_collection.find_one(query)['urls']
         # randomly shuffle the sequence of one csv file
         # to make sure urls for each player are different even they are from the same csv list file
@@ -78,9 +96,23 @@ def random_select_csv():
         csv_dict = {}
         for i in range(len(urls)):
             csv_dict[i + 1] = urls[i]
-        return csv_dict
-
+        return selected_csv, csv_dict
+        # if session_code_in_db == -1:
+        #     if num_csv_per_session < 174:
+        #         # update session count value
+        #         new_value_s = {"$set": {
+        #             "name": session_code,
+        #             "num": num_csv_per_session + 1
+        #         }}
+        #         session_collection.update_one(session_query, new_value_s)
+        #     else:
+        #         # exceed the maximum num of csv files per session
+        #         return random_select_csv(session_code)
+        # elif not session_code_in_db == session_code:
+        #     # wrong session code
+        #     return random_select_csv(session_code)
     else:
+        # exceed the maximum num of replication
         return random_select_csv()
 
 
@@ -106,7 +138,7 @@ class Constants(BaseConstants):
     # we select random ac rounds in [1-10], [11-20], ...
     for round_interval in range(1, num_rounds, 10):
         attention_check_list.append(random.sample(range(round_interval, round_interval + 9), k=1)[0])
-        print(attention_check_list)
+        # print(attention_check_list)
     attention_check_answers = {"AC_Q0": "Average/Neutral",
                                "AC_Q1": "Exogenous",
                                "AC_Q2": "Versatile",
@@ -120,9 +152,10 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def creating_session(self):
         for player in self.get_players():
-            if "urls" in player.participant.vars:
+            if "urls" in player.participant.vars or 'csv_file_used' in player.participant.vars:
                 continue
-            player.participant.vars["urls"] = random_select_csv()
+            # print(self.session.code)
+            player.participant.vars["csv_file_used"], player.participant.vars["urls"] = random_select_csv()
             player.participant.vars["ac_urls"] = get_all_ac_urls()
             player.participant.vars["attention_check_list"] = Constants.attention_check_list.copy()
 
@@ -161,6 +194,9 @@ class Player(BasePlayer):
     start_time_per_question = models.FloatField(blank=True)
     # how long subjects take to finish one question (in seconds)
     time_spent_per_question = models.FloatField(blank=True)
+
+    # csv_file
+    csv_file_used = models.LongStringField(initial=0)
 
     # urls used for normal rounds and attention check rounds
     normal_pic_url = models.LongStringField(initial=0)
