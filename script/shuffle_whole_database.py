@@ -17,7 +17,7 @@ for i in range(csv_num):
     new_df = pd.DataFrame(total_urls[50*i:50*(i+1)])
     new_df.to_csv(new_csv_list[i], index=False, header=False)
 
-deprecated_list = '../database/list_deprecated.csv'
+deprecated_list = '../database/list_698.csv'
 new_df = pd.DataFrame(total_urls[50*csv_num:])
 new_df.to_csv(deprecated_list, index=False, header=False)
 

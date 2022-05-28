@@ -73,7 +73,7 @@ def random_select_csv():
     #     for x in record_collection.find({"session_code": -1}):
     #         csv_list.append(x['name'])
 
-    csv_list = ['list_' + str(i + 1) + '.csv' for i in range(697)]
+    csv_list = ['list_' + str(i + 1) + '.csv' for i in range(689)]
 
     selected_csv = random.choice(csv_list)
     # print(selected_csv)
