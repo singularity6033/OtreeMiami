@@ -24,8 +24,8 @@ SESSION_CONFIGS = [
             'cdd129'
         ],
         treatment=1,  # page sequence [X, Y, Z]
-        completion_link='https://app.prolific.co/submissions/complete?cc=5EF380EE',
-        # non_completion_link='https://www.prolific.co/'
+        completion_link='https://app.prolific.co/submissions/complete?cc=3E55FFEE',
+        ac_failed_link='https://app.prolific.co/submissions/complete?cc=132E2332'
     )
 ]
 # see the end of this file for the inactive session configs

@@ -41,8 +41,8 @@ class cbb239(Page):
 
 
 class cty731(Page):
-    # def is_displayed(self):
-    #     return self.participant.vars['AC_Correctness'] > 0.5
+    def is_displayed(self):
+        return self.participant.vars['AC_Correctness'] >= 0.5
 
     def vars_for_template(self):
         if self.participant.vars['AC_Correctness'] >= 0.5:
@@ -52,15 +52,16 @@ class cty731(Page):
         )
 
 
-# class non_completion_page(Page):
-#     def is_displayed(self):
-#         # return False
-#         return not self.participant.vars['AC_Correctness'] <= 0.5
-#
-#     def vars_for_template(self):
-#         return dict(
-#             noncompletionlink=self.player.subsession.session.config['non_completion_link']
-#         )
+class ac_failed_page(Page):
+    def is_displayed(self):
+        return self.participant.vars['AC_Correctness'] < 0.5
+
+    def vars_for_template(self):
+        if self.participant.vars['AC_Correctness'] < 0.5:
+            self.player.attention_check_pass = False
+        return dict(
+            acfailedlink=self.player.subsession.session.config['ac_failed_link']
+        )
 
 
 page_sequence = [
@@ -68,5 +69,5 @@ page_sequence = [
     cab213,
     cbb239,
     cty731,
-    # non_completion_page
+    ac_failed_page
 ]
