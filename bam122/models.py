@@ -49,44 +49,27 @@ def random_select_csv():
     db = client['test-database']
     csv_collection = db['csv']
     record_collection = db['record']
-    # session_collection = db['session']
-
-    # session_query = {"name": session_code}
-    # session_record = session_collection.find_one(session_query)
-    # if session_record:
-    #     num_csv_per_session = session_record['num']
-    # else:
-    #     session_in_db = {
-    #         "name": session_code,
-    #         "num": 0,
-    #     }
-    #     session_collection.insert_one(session_in_db)
-    #     num_csv_per_session = 0
-
-    # if num_csv_per_session >= 174:
-    #     csv_list = []
-    #     for x in record_collection.find({"session_code": session_code}):
-    #         if x['count'] < 3:
-    #             csv_list.append(x['name'])
-    # else:
-    #     csv_list = []
-    #     for x in record_collection.find({"session_code": -1}):
-    #         csv_list.append(x['name'])
 
     csv_list = ['list_' + str(i + 1) + '.csv' for i in range(697)]
 
+    # in last several sessions the search time will be intensive and may cause request times error
+    # this code will try to do random search only on the valid set
+    # record_query = {"count": {"$lt": 3}}
+    # records = record_collection.find(record_query)
+    # csv_names_remained = []
+    # for record in records:
+    #     csv_names_remained.append(record['name'])
+    # random.shuffle(csv_names_remained)
+    # selected_csv = csv_names_remained[0]
     selected_csv = random.choice(csv_list)
-    # print(selected_csv)
     query = {"name": selected_csv}
     record = record_collection.find_one(query)
     selected_csv_times = record['count']
-    # session_code_in_db = record['session_code']
 
     if selected_csv_times < 3:
         # update count value
         new_value_c = {"$set": {
             "count": selected_csv_times + 1,
-            # "session_code": session_code
         }}
         record_collection.update_one(query, new_value_c)
         urls = csv_collection.find_one(query)['urls']
@@ -97,22 +80,7 @@ def random_select_csv():
         for i in range(len(urls)):
             csv_dict[i + 1] = urls[i]
         return selected_csv, csv_dict
-        # if session_code_in_db == -1:
-        #     if num_csv_per_session < 174:
-        #         # update session count value
-        #         new_value_s = {"$set": {
-        #             "name": session_code,
-        #             "num": num_csv_per_session + 1
-        #         }}
-        #         session_collection.update_one(session_query, new_value_s)
-        #     else:
-        #         # exceed the maximum num of csv files per session
-        #         return random_select_csv(session_code)
-        # elif not session_code_in_db == session_code:
-        #     # wrong session code
-        #     return random_select_csv(session_code)
     else:
-        # exceed the maximum num of replication
         return random_select_csv()
 
 
