@@ -5,9 +5,9 @@ import pandas as pd
 from pymongo import MongoClient
 from tqdm import tqdm
 
-data_path = "E:/Academia/NTU/SEC_NTU_FSR/oTree_Miami/oTree_Miami_Data"
-client = MongoClient('mongodb+srv://admin:admin@cluster0.enguk.mongodb.net/test-database?retryWrites=true&w=majority')
-db = client['test-database']
+data_path = "../data_collected"
+client = MongoClient('mongodb+srv://miami:miami6033626@cluster0.lodffed.mongodb.net/?retryWrites=true&w=majority')
+db = client['miami-database']
 csv_collection = db['csv']
 record_collection = db['record']
 csv_list = [f'list_{str(i + 1)}.csv' for i in range(697)]

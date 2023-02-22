@@ -1,5 +1,7 @@
 import os
 import random
+
+import pandas as pd
 from jsonfield import JSONField
 from otree.api import (
     models,
@@ -42,11 +44,11 @@ def make_attention_check_field(trait_n, trait_p, reqAns):
     return make_general_field(trait_n, trait_p, "{}".format(reqAns))
 
 
-def random_select_csv():
+def random_select_csv(user_id):
     # connect mongodb
     client = MongoClient(
-        'mongodb+srv://admin:admin@cluster0.enguk.mongodb.net/test-database?retryWrites=true&w=majority')
-    db = client['test-database']
+        'mongodb+srv://miami:miami6033626@cluster0.lodffed.mongodb.net/?retryWrites=true&w=majority')
+    db = client['miami-database']
     csv_collection = db['csv']
     record_collection = db['record']
 
@@ -61,15 +63,19 @@ def random_select_csv():
     #     csv_names_remained.append(record['name'])
     # random.shuffle(csv_names_remained)
     # selected_csv = csv_names_remained[0]
+
     selected_csv = random.choice(csv_list)
     query = {"name": selected_csv}
     record = record_collection.find_one(query)
     selected_csv_times = record['count']
+    current_users = record['prolific_ids']
 
-    if selected_csv_times < 3:
+    if selected_csv_times < 7:
         # update count value
+        current_users.append(user_id)
         new_value_c = {"$set": {
             "count": selected_csv_times + 1,
+            "prolific_ids": current_users
         }}
         record_collection.update_one(query, new_value_c)
         urls = csv_collection.find_one(query)['urls']
@@ -81,7 +87,7 @@ def random_select_csv():
             csv_dict[i + 1] = urls[i]
         return selected_csv, csv_dict
     else:
-        return random_select_csv()
+        return random_select_csv(user_id)
 
 
 def get_all_ac_urls():
@@ -122,8 +128,7 @@ class Subsession(BaseSubsession):
         for player in self.get_players():
             if "urls" in player.participant.vars or 'csv_file_used' in player.participant.vars:
                 continue
-            # print(self.session.code)
-            player.participant.vars["csv_file_used"], player.participant.vars["urls"] = random_select_csv()
+            player.participant.vars["csv_file_used"], player.participant.vars["urls"] = random_select_csv(user_id=player.participant.label)
             player.participant.vars["ac_urls"] = get_all_ac_urls()
             player.participant.vars["attention_check_list"] = Constants.attention_check_list.copy()
 
